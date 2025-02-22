@@ -10,5 +10,5 @@ int main() {
 
     auto binaryDerivative = std::dynamic_pointer_cast<BinaryExpression>(derivative);
 
-    std::cout << binaryDerivative << std::endl;
+    std::cout << binaryDerivative->toString() << std::endl;
 }

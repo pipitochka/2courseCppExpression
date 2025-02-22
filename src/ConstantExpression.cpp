@@ -7,3 +7,7 @@ std::shared_ptr<Expression> ConstantExpression::diff() {
 double ConstantExpression::eval(std::map<std::string, int> &params) {
     return value;
 }
+
+std::string ConstantExpression::toString() {
+    return std::to_string(value);
+}

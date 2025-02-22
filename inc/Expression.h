@@ -2,8 +2,6 @@
 #define EXPRESSION_H
 #include <map>
 #include <string>
-#include <functional>
-#include <utility>
 
 enum operators {plus_op, minus_op, div_op, mul_op, exp_op};
 enum functions {sin_func, cos_func, ln_func, exp_func};
@@ -20,11 +18,20 @@ class Expression {
 public:
     virtual std::shared_ptr<Expression> diff() = 0;
     virtual double eval(std::map<std::string, int> &params) = 0;
+    virtual std::string toString() = 0;
 };
+
+
+class ConstantExpression;
+class VarExpression;
+class MonoExpression;
+class BinaryExpression;
+
 
 class ConstantExpression : public Expression {
 private:
-    double value;  
+    double value;
+    
 public:
     ConstantExpression(double value) : value(value) {};
     ~ConstantExpression() = default;
@@ -34,15 +41,16 @@ public:
     ConstantExpression& operator=(ConstantExpression&&) = default;
     
     double eval(std::map<std::string, int> &params) override;
-
     std::shared_ptr<Expression> diff() override;
+    std::string toString() override;
 };
 
+
 class VarExpression : public Expression {
-    private:
+private:
     std::string value;
 
-    public:
+public:
     VarExpression(const std::string &value) : value(value) {};
     ~VarExpression() = default;
     VarExpression(const VarExpression&) = default;
@@ -51,18 +59,16 @@ class VarExpression : public Expression {
     VarExpression& operator=(VarExpression&&) = default;
 
     double eval(std::map<std::string, int> &params) override;
-
     std::shared_ptr<Expression> diff() override;
+    std::string toString() override;
 };
 
-class BinaryExpression;
-
 class MonoExpression : public Expression {
-    private:
+private:
     std::shared_ptr<Expression> expr;
     functions function;
     
-    public:
+public:
     MonoExpression(const std::shared_ptr<Expression> &expr, functions function) {
         this->expr = expr;
         this->function = function;
@@ -74,17 +80,17 @@ class MonoExpression : public Expression {
     MonoExpression& operator=(MonoExpression&&) = default;
 
     double eval(std::map<std::string, int> &params) override;
-
     std::shared_ptr<Expression> diff() override;
+    std::string toString() override;
 };
 
 class BinaryExpression : public Expression {
-    private:
+private:
     std::shared_ptr<Expression> lhs;
     std::shared_ptr<Expression> rhs;
     operators op;
     
-    public:
+public:
     BinaryExpression(const std::shared_ptr<Expression> &lhs, const std::shared_ptr<Expression> &rhs, operators op) {
         this->lhs = lhs;
         this->rhs = rhs;
@@ -97,11 +103,8 @@ class BinaryExpression : public Expression {
     BinaryExpression& operator=(BinaryExpression&&) = default;
 
     double eval(std::map<std::string, int> &params) override;
-
     std::shared_ptr<Expression> diff() override;
+    std::string toString() override;
 };
-
-
-
 
 #endif //EXPRESSION_H

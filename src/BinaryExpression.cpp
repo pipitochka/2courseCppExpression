@@ -65,3 +65,25 @@ double BinaryExpression::eval(std::map<std::string, int> &params) {
             return std::pow(lhs->eval(params), rhs->eval(params));
     }
 }
+
+std::string BinaryExpression::toString() {
+    std::string tmp;
+    switch (op) {
+        case plus_op:
+            tmp = "+";
+            break;
+        case minus_op:
+            tmp = "-";
+            break;
+        case mul_op:
+            tmp = "*";
+            break;
+        case div_op:
+            tmp = "/";
+            break;
+        case exp_op:
+            tmp = "^";
+            break;
+    }
+    return lhs->toString() + " " + tmp + " " + rhs->toString();
+}

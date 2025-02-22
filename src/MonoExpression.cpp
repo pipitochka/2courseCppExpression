@@ -36,3 +36,22 @@ double MonoExpression::eval(std::map<std::string, int> &params) {
             return std::exp(expr->eval(params));
     }
 }
+
+std::string MonoExpression::toString() {
+    std::string tmp;
+    switch (function) {
+        case cos_func:
+            tmp = "cos";
+            break;
+        case sin_func:
+            tmp = "sin";
+            break;
+        case ln_func:
+            tmp = "ln";
+            break;
+        case exp_func:
+            tmp = "exp";
+            break;
+    }
+    return tmp + "(" + expr->toString() + ")";
+}
