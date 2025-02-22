@@ -1,0 +1,9 @@
+#include "../inc/Expression.h"
+
+std::shared_ptr<Expression> ConstantExpression::diff() {
+    return std::make_shared<ConstantExpression>(ConstantExpression(0));
+}
+
+double ConstantExpression::eval(std::map<std::string, int> &params) {
+    return value;
+}
