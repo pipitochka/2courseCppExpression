@@ -3,8 +3,25 @@
 #include <map>
 #include <string>
 
-enum operators {plus_op, minus_op, div_op, mul_op, exp_op};
+enum oper {plus_op, minus_op, div_op, mul_op, exp_op};
 enum functions {sin_func, cos_func, ln_func, exp_func};
+
+class operators {
+public:
+    oper value;
+    int rank;
+    operators(oper op) : value(op) {
+        if (value == plus_op || value == minus_op) {
+            rank = 1;
+        }
+        if (value == div_op || value == mul_op) {
+            rank = 2;
+        }
+        if (value == exp_op) {
+            rank = 3;
+        }
+    }
+};
 
 class ZeroDivExeption : public std::exception {
     public:
@@ -91,17 +108,20 @@ private:
     operators op;
     
 public:
-    BinaryExpression(const std::shared_ptr<Expression> &lhs, const std::shared_ptr<Expression> &rhs, operators op) {
+    BinaryExpression(const std::shared_ptr<Expression> &lhs, const std::shared_ptr<Expression> &rhs, oper op): op(op) {
         this->lhs = lhs;
         this->rhs = rhs;
-        this->op = op;
     }
+
     ~BinaryExpression() = default;
     BinaryExpression(const BinaryExpression&) = default;
     BinaryExpression& operator=(const BinaryExpression&) = default;
     BinaryExpression(BinaryExpression&&) = default;
     BinaryExpression& operator=(BinaryExpression&&) = default;
 
+    std::shared_ptr<Expression> getLhs() { return lhs; }
+    void setLhs(std::shared_ptr<Expression> lhs) { this->lhs = lhs; }
+    operators getOp() { return op; }
     double eval(std::map<std::string, int> &params) override;
     std::shared_ptr<Expression> diff() override;
     std::string toString() override;

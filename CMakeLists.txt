@@ -12,9 +12,19 @@ file(GLOB EXPRESSION_SOURCES
         src/VarExpression.cpp
 )
 
+file(GLOB TOKEN_SOURCES
+        src/Token.cpp
+)
+
+file(GLOB PARSER_SOURCES
+        src/Parser.cpp
+)
+
 add_library(EXPRESSION ${EXPRESSION_SOURCES})
+add_library(TOKEN ${TOKEN_SOURCES})
+add_library(PARSER ${PARSER_SOURCES})
 
-add_executable(Expression main.cpp
-        src/ConstantExpression.cpp)
+add_executable(Expression main.cpp)
 
-target_link_libraries(Expression PRIVATE EXPRESSION)
+target_link_libraries(PARSER PRIVATE TOKEN EXPRESSION)
+target_link_libraries(Expression PRIVATE EXPRESSION TOKEN PARSER)

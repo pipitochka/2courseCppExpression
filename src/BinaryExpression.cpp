@@ -1,10 +1,10 @@
 #include "../inc/Expression.h"
 
 std::shared_ptr<Expression> BinaryExpression::diff() {
-    switch (op) {
+    switch (op.value) {
         case plus_op:
         case minus_op:
-            return std::make_shared<BinaryExpression>(BinaryExpression(lhs->diff(), rhs->diff(), op));
+            return std::make_shared<BinaryExpression>(BinaryExpression(lhs->diff(), rhs->diff(), op.value));
         case mul_op:
             return std::make_shared<BinaryExpression>(
                 BinaryExpression(
@@ -49,7 +49,7 @@ std::shared_ptr<Expression> BinaryExpression::diff() {
 }
 
 double BinaryExpression::eval(std::map<std::string, int> &params) {
-    switch (op) {
+    switch (op.value) {
         case plus_op:
             return lhs->eval(params) + rhs->eval(params);
         case minus_op:
@@ -68,7 +68,7 @@ double BinaryExpression::eval(std::map<std::string, int> &params) {
 
 std::string BinaryExpression::toString() {
     std::string tmp;
-    switch (op) {
+    switch (op.value) {
         case plus_op:
             tmp = "+";
             break;
