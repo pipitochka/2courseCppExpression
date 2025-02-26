@@ -81,7 +81,7 @@ private:
     std::string value;
 
 public:
-    VarExpression(const std::string &value) : value(value) {};
+    VarExpression(const std::string value) : value(value) {};
     ~VarExpression() = default;
     VarExpression(const VarExpression&) = default;
     VarExpression& operator=(const VarExpression&) = default;
