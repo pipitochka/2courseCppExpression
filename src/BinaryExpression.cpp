@@ -1,6 +1,6 @@
 #include "../inc/Expression.h"
 
-std::shared_ptr<Expression> BinaryExpression::diff(std::string& s) {
+std::shared_ptr<Expression> BinaryExpression::diff(std::string &s) {
     auto lhs_diff = lhs->diff(s);
     auto rhs_diff = rhs->diff(s);
     auto lhs_const = dynamic_cast<ConstantExpression*>(lhs.get());

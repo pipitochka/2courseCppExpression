@@ -29,3 +29,18 @@ add_executable(Expression main.cpp)
 
 target_link_libraries(PARSER PRIVATE TOKEN EXPRESSION)
 target_link_libraries(Expression PRIVATE EXPRESSION TOKEN PARSER)
+
+file(GLOB TEST_SOURCES
+        tests/testDiff.cpp
+        tests/testInput.cpp
+        tests/testEval.cpp
+)
+
+foreach(test_file ${TEST_SOURCES})
+    get_filename_component(test_name ${test_file} NAME_WE) 
+    add_executable(${test_name} ${test_file})
+    target_link_libraries(${test_name} PRIVATE EXPRESSION TOKEN PARSER)
+    set_target_properties(${test_name} PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tests 
+    )
+endforeach()

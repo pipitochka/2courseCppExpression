@@ -1,7 +1,7 @@
 #include "../inc/Expression.h"
 
-std::shared_ptr<Expression> VarExpression::diff(std::string& s) {
-    if (value == s){
+std::shared_ptr<Expression> VarExpression::diff(std::string &s) {
+    if (s == value) {
         return std::make_shared<ConstantExpression>(ConstantExpression(1));
     }
     else {

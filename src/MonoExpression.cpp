@@ -1,6 +1,6 @@
 #include "../inc/Expression.h"
 
-std::shared_ptr<Expression> MonoExpression::diff(std::string& s) {
+std::shared_ptr<Expression> MonoExpression::diff(std::string &s) {
     auto exp_diff = expr->diff(s);
     switch (function) {
         case cos_func: {

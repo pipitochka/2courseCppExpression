@@ -2,6 +2,7 @@
 #define EXPRESSION_H
 #include <map>
 #include <string>
+#include <set>
 
 enum oper {plus_op, minus_op, div_op, mul_op, exp_op};
 enum functions {sin_func, cos_func, ln_func, exp_func};
@@ -40,7 +41,7 @@ public:
 
 class Expression {
 public:
-    virtual std::shared_ptr<Expression> diff(std::string& s) = 0;
+    virtual std::shared_ptr<Expression> diff(std::string &s) = 0;
     virtual double eval(std::map<std::string, int> &params) = 0;
     virtual std::string toString() = 0;
 };
@@ -68,7 +69,7 @@ public:
         return value;
     }
     double eval(std::map<std::string, int> &params) override;
-    std::shared_ptr<Expression> diff(std::string& s) override;
+    std::shared_ptr<Expression> diff(std::string &s) override;
     std::string toString() override;
 };
 
@@ -86,7 +87,7 @@ public:
     VarExpression& operator=(VarExpression&&) = default;
 
     double eval(std::map<std::string, int> &params) override;
-    std::shared_ptr<Expression> diff(std::string& s) override;
+    std::shared_ptr<Expression> diff(std::string &s) override;
     std::string toString() override;
 };
 
@@ -107,7 +108,7 @@ public:
     MonoExpression& operator=(MonoExpression&&) = default;
 
     double eval(std::map<std::string, int> &params) override;
-    std::shared_ptr<Expression> diff(std::string& s) override;
+    std::shared_ptr<Expression> diff(std::string &s) override;
     std::string toString() override;
     friend std::shared_ptr<Expression> optimize(std::shared_ptr<Expression> expr);
 };
@@ -134,7 +135,7 @@ public:
     void setLhs(std::shared_ptr<Expression> lhs) { this->lhs = lhs; }
     operators getOp() { return op; }
     double eval(std::map<std::string, int> &params) override;
-    std::shared_ptr<Expression> diff(std::string& s) override;
+    std::shared_ptr<Expression> diff(std::string &s) override;
     std::string toString() override;
     friend std::shared_ptr<Expression> optimize(std::shared_ptr<Expression> expr);
 };

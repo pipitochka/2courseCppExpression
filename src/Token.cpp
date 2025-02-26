@@ -39,7 +39,7 @@ std::unique_ptr<Token> tokenize(std::string input) {
         }
         else if (std::isdigit(input[i])) {
             int j = i;
-            while (j < input.size() && std::isdigit(input[j])) {
+            while (j < input.size() && (std::isdigit(input[j]) || input[j] == '.')) {
                 j++;
             }
             curr->next = std::make_unique<Token>(input.substr(i, j - i), TokenType::NUM);

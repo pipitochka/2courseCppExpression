@@ -1,6 +1,6 @@
 #include "../inc/Expression.h"
 
-std::shared_ptr<Expression> ConstantExpression::diff(std::string& s) {
+std::shared_ptr<Expression> ConstantExpression::diff(std::string &s) {
     return std::make_shared<ConstantExpression>(ConstantExpression(0));
 }
 

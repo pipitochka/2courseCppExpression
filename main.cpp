@@ -30,17 +30,17 @@ int main() {
     // std::cout << q3.first->toString() << std::endl;
     // std::cout << q3.first->diff(s)->toString() << std::endl;
 
-    std::string input4 = "x * sin(x)";
-    auto token4 = tokenize(input4);
-    printToken(token4.get());
-    std::cout << std::endl;
-    
-    std::string s = "x";
-    auto q4 = parseExpression(token4.get());
-    auto qq4 = q4.first->diff(s);
-    std::cout << q4.first->toString() << std::endl;
-    std::cout << qq4->toString() << std::endl;
-    std::cout << optimize(qq4)->toString() << std::endl;
+    // std::string input4 = "x * sin(x)";
+    // auto token4 = tokenize(input4);
+    // printToken(token4.get());
+    // std::cout << std::endl;
+    //
+    // std::string s = "x";
+    // auto q4 = parseExpression(token4.get());
+    // auto qq4 = q4.first->diff(s);
+    // std::cout << q4.first->toString() << std::endl;
+    // std::cout << qq4->toString() << std::endl;
+    // std::cout << optimize(qq4)->toString() << std::endl;
     
     // BinaryExpression expression(std::make_shared<ConstantExpression>(ConstantExpression(1)),
     //     std::make_shared<VarExpression>(VarExpression("x")),
