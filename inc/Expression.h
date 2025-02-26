@@ -3,6 +3,8 @@
 #include <map>
 #include <string>
 #include <set>
+#include <memory>
+#include <cmath>
 
 enum oper {plus_op, minus_op, div_op, mul_op, exp_op};
 enum functions {sin_func, cos_func, ln_func, exp_func};
