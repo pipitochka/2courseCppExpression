@@ -2,6 +2,8 @@
 #define TOKEN_H
 
 #include <string>
+#include <memory>
+#include <algorithm>
 
 enum TokenType { START, FUNC, NUM, ID, SCOPE, OP};
 

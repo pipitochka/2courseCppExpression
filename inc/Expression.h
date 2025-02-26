@@ -3,6 +3,8 @@
 #include <map>
 #include <string>
 #include <set>
+#include <memory>
+#include <cmath>
 
 enum oper {plus_op, minus_op, div_op, mul_op, exp_op};
 enum functions {sin_func, cos_func, ln_func, exp_func};
@@ -79,7 +81,7 @@ private:
     std::string value;
 
 public:
-    VarExpression(const std::string &value) : value(value) {};
+    VarExpression(const std::string value) : value(value) {};
     ~VarExpression() = default;
     VarExpression(const VarExpression&) = default;
     VarExpression& operator=(const VarExpression&) = default;
