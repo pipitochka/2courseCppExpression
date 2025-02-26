@@ -1,25 +1,35 @@
 #include "../inc/Expression.h"
 
-std::shared_ptr<Expression> MonoExpression::diff() {
+std::shared_ptr<Expression> MonoExpression::diff(std::string& s) {
+    auto exp_diff = expr->diff(s);
     switch (function) {
-        case cos_func:
+        case cos_func: {
+            return std::make_shared<BinaryExpression>(
+                std::make_shared<BinaryExpression>(BinaryExpression(
+                    std::make_shared<ConstantExpression>(ConstantExpression(-1.0)),
+                    std::make_shared<MonoExpression>(MonoExpression(expr, sin_func)),
+                mul_op)),
+                exp_diff,
+                mul_op);
+        }
+        case sin_func: {
+            return std::make_shared<BinaryExpression>(
+                std::make_shared<MonoExpression>(MonoExpression(expr, cos_func)),
+                exp_diff,
+                mul_op);
+        }
+        case ln_func: {
             return std::make_shared<BinaryExpression>(BinaryExpression(
-                std::make_shared<ConstantExpression>(ConstantExpression(-1.0)),
-                std::make_shared<MonoExpression>(MonoExpression(expr, sin_func)),
-                mul_op
-            ));
-        case sin_func:
-            return std::make_shared<MonoExpression>(MonoExpression(expr, cos_func));
-        case ln_func:
-            return std::make_shared<BinaryExpression>(BinaryExpression(
-                expr->diff(),
+                exp_diff,
                 expr,
                 div_op));
-        case exp_func:
+        }
+        case exp_func: {
             return std::make_shared<BinaryExpression>(BinaryExpression(
-                expr->diff(),
+                exp_diff,
                 std::make_shared<MonoExpression>(MonoExpression(expr, function)),
                 mul_op));
+        }
     }
     return nullptr;
 }

@@ -20,14 +20,25 @@ int main() {
     // auto q2 = parseExpression(token2.get());
     // std::cout << q2.first->toString() << std::endl;
     
-    std::string input3 = "sin(cos(x)) + exp(ln(y)) ^ n";
-    auto token3 = tokenize(input3);
-    printToken(token3.get());
-    std::cout << std::endl;
+    // std::string input3 = "sin(cos(x)) + exp(ln(y)) ^ n";
+    // auto token3 = tokenize(input3);
+    // printToken(token3.get());
+    // std::cout << std::endl;
+    //
+    // std::string s = "x";
+    // auto q3 = parseExpression(token3.get());
+    // std::cout << q3.first->toString() << std::endl;
+    // std::cout << q3.first->diff(s)->toString() << std::endl;
 
-    auto q3 = parseExpression(token3.get());
-    std::cout << q3.first->toString() << std::endl;
-    std::cout << q3.first->diff()->toString() << std::endl;
+    std::string input4 = "x * sin(x)";
+    auto token4 = tokenize(input4);
+    printToken(token4.get());
+    std::cout << std::endl;
+    
+    std::string s = "x";
+    auto q4 = parseExpression(token4.get());
+    std::cout << q4.first->toString() << std::endl;
+    std::cout << q4.first->diff(s)->toString() << std::endl;
     
     // BinaryExpression expression(std::make_shared<ConstantExpression>(ConstantExpression(1)),
     //     std::make_shared<VarExpression>(VarExpression("x")),

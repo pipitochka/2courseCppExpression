@@ -1,7 +1,12 @@
 #include "../inc/Expression.h"
 
-std::shared_ptr<Expression> VarExpression::diff() {
-    return std::make_shared<ConstantExpression>(ConstantExpression(1));
+std::shared_ptr<Expression> VarExpression::diff(std::string& s) {
+    if (value == s){
+        return std::make_shared<ConstantExpression>(ConstantExpression(1));
+    }
+    else {
+        return std::make_shared<ConstantExpression>(0);
+    }
 }
 
 double VarExpression::eval(std::map<std::string, int> &map) {

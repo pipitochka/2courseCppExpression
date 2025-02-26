@@ -30,10 +30,17 @@ class ZeroDivExeption : public std::exception {
     }
 };
 
+class ZeroExpExeption : public std::exception {
+public:
+    const char* what() const noexcept override {
+        return "Zero exp zero!";
+    }
+};
+
 
 class Expression {
 public:
-    virtual std::shared_ptr<Expression> diff() = 0;
+    virtual std::shared_ptr<Expression> diff(std::string& s) = 0;
     virtual double eval(std::map<std::string, int> &params) = 0;
     virtual std::string toString() = 0;
 };
@@ -56,9 +63,12 @@ public:
     ConstantExpression& operator=(const ConstantExpression&) = default;
     ConstantExpression(ConstantExpression&&) = default;
     ConstantExpression& operator=(ConstantExpression&&) = default;
-    
+
+    double getValue() {
+        return value;
+    }
     double eval(std::map<std::string, int> &params) override;
-    std::shared_ptr<Expression> diff() override;
+    std::shared_ptr<Expression> diff(std::string& s) override;
     std::string toString() override;
 };
 
@@ -76,7 +86,7 @@ public:
     VarExpression& operator=(VarExpression&&) = default;
 
     double eval(std::map<std::string, int> &params) override;
-    std::shared_ptr<Expression> diff() override;
+    std::shared_ptr<Expression> diff(std::string& s) override;
     std::string toString() override;
 };
 
@@ -97,7 +107,7 @@ public:
     MonoExpression& operator=(MonoExpression&&) = default;
 
     double eval(std::map<std::string, int> &params) override;
-    std::shared_ptr<Expression> diff() override;
+    std::shared_ptr<Expression> diff(std::string& s) override;
     std::string toString() override;
 };
 
@@ -123,8 +133,10 @@ public:
     void setLhs(std::shared_ptr<Expression> lhs) { this->lhs = lhs; }
     operators getOp() { return op; }
     double eval(std::map<std::string, int> &params) override;
-    std::shared_ptr<Expression> diff() override;
+    std::shared_ptr<Expression> diff(std::string& s) override;
     std::string toString() override;
 };
+
+void optimize(std::shared_ptr<Expression> expr);
 
 #endif //EXPRESSION_H

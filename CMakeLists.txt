@@ -10,6 +10,7 @@ file(GLOB EXPRESSION_SOURCES
         src/ConstantExpression.cpp
         src/MonoExpression.cpp
         src/VarExpression.cpp
+        src/Optimization.cpp
 )
 
 file(GLOB TOKEN_SOURCES
