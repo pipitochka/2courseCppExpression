@@ -109,6 +109,7 @@ public:
     double eval(std::map<std::string, int> &params) override;
     std::shared_ptr<Expression> diff(std::string& s) override;
     std::string toString() override;
+    friend std::shared_ptr<Expression> optimize(std::shared_ptr<Expression> expr);
 };
 
 class BinaryExpression : public Expression {
@@ -135,8 +136,9 @@ public:
     double eval(std::map<std::string, int> &params) override;
     std::shared_ptr<Expression> diff(std::string& s) override;
     std::string toString() override;
+    friend std::shared_ptr<Expression> optimize(std::shared_ptr<Expression> expr);
 };
 
-void optimize(std::shared_ptr<Expression> expr);
+std::shared_ptr<Expression> optimize(std::shared_ptr<Expression> expr);
 
 #endif //EXPRESSION_H
