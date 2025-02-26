@@ -7,8 +7,7 @@
 
 void TestDiff(std::string input, std::string expected, std::string param) {
     auto tmp = tokenize(input);
-    auto var = parseExpression(tmp.get());
-    auto value = var.first;
+    auto value = parseExpression(tmp.get());
     auto result = value->diff(param);
     std::cout << input << std::endl;
     std::cout << result->toString() << std::endl;

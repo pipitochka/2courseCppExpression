@@ -115,6 +115,6 @@ std::pair<std::shared_ptr<Expression>, Token*> parseExpression(Token* token, int
     return std::make_pair(tmp, nullptr);
 }
 
-std::pair<std::shared_ptr<Expression>, Token*> parseExpression(Token* token) {
-    return parseExpression(token, 0, false);
+std::shared_ptr<Expression> parseExpression(Token* token) {
+    return parseExpression(token, 0, false).first;
 }

@@ -11,6 +11,6 @@ public:
     }
 };
 
-std::pair<std::shared_ptr<Expression>, Token*> parseExpression(Token* token);
+std::shared_ptr<Expression> parseExpression(Token* token);
 
 #endif //PARSER_H

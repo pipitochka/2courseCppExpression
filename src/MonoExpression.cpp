@@ -34,7 +34,7 @@ std::shared_ptr<Expression> MonoExpression::diff(std::string &s) {
     return nullptr;
 }
 
-double MonoExpression::eval(std::map<std::string, int> &params) {
+double MonoExpression::eval(std::map<std::string, double> &params) {
     switch (function) {
         case cos_func:
             return std::cos(expr->eval(params));

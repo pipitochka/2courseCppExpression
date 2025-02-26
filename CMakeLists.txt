@@ -25,10 +25,10 @@ add_library(EXPRESSION ${EXPRESSION_SOURCES})
 add_library(TOKEN ${TOKEN_SOURCES})
 add_library(PARSER ${PARSER_SOURCES})
 
-add_executable(Expression main.cpp)
+add_executable(differentiator main.cpp)
 
 target_link_libraries(PARSER PRIVATE TOKEN EXPRESSION)
-target_link_libraries(Expression PRIVATE EXPRESSION TOKEN PARSER)
+target_link_libraries(differentiator PRIVATE EXPRESSION TOKEN PARSER)
 
 file(GLOB TEST_SOURCES
         tests/testDiff.cpp

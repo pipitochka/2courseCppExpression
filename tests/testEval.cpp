@@ -5,10 +5,9 @@
 #include "../inc/Expression.h"
 #include "../inc/Parser.h"
 
-void TestEval(std::string input, double expected, std::map<std::string, int> params) {
+void TestEval(std::string input, double expected, std::map<std::string, double> params) {
     auto tmp = tokenize(input);
-    auto var = parseExpression(tmp.get());
-    auto result = var.first;
+    auto result = parseExpression(tmp.get());
     auto qq = result->eval(params);
     std::cout << input << std::endl;
     std::cout << qq << std::endl;

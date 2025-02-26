@@ -99,7 +99,7 @@ std::shared_ptr<Expression> BinaryExpression::diff(std::string &s) {
     return nullptr;
 }
 
-double BinaryExpression::eval(std::map<std::string, int> &params) {
+double BinaryExpression::eval(std::map<std::string, double> &params) {
     switch (op.value) {
         case plus_op:
             if (lhs->eval(params) == 0 && rhs->eval(params) == 0) {

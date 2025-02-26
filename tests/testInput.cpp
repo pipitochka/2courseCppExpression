@@ -7,8 +7,7 @@
 
 void TestInput(std::string input, std::string expected) {
     auto tmp = tokenize(input);
-    auto var = parseExpression(tmp.get());
-    auto result = var.first;
+    auto result = parseExpression(tmp.get());
     std::cout << input << std::endl;
     std::cout << result->toString() << std::endl;
     std::cout << expected << std::endl;

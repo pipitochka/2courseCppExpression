@@ -42,7 +42,7 @@ public:
 class Expression {
 public:
     virtual std::shared_ptr<Expression> diff(std::string &s) = 0;
-    virtual double eval(std::map<std::string, int> &params) = 0;
+    virtual double eval(std::map<std::string, double> &params) = 0;
     virtual std::string toString() = 0;
 };
 
@@ -68,7 +68,7 @@ public:
     double getValue() {
         return value;
     }
-    double eval(std::map<std::string, int> &params) override;
+    double eval(std::map<std::string, double> &params) override;
     std::shared_ptr<Expression> diff(std::string &s) override;
     std::string toString() override;
 };
@@ -86,7 +86,7 @@ public:
     VarExpression(VarExpression&&) = default;
     VarExpression& operator=(VarExpression&&) = default;
 
-    double eval(std::map<std::string, int> &params) override;
+    double eval(std::map<std::string, double> &params) override;
     std::shared_ptr<Expression> diff(std::string &s) override;
     std::string toString() override;
 };
@@ -107,7 +107,7 @@ public:
     MonoExpression(MonoExpression&&) = default;
     MonoExpression& operator=(MonoExpression&&) = default;
 
-    double eval(std::map<std::string, int> &params) override;
+    double eval(std::map<std::string, double> &params) override;
     std::shared_ptr<Expression> diff(std::string &s) override;
     std::string toString() override;
     friend std::shared_ptr<Expression> optimize(std::shared_ptr<Expression> expr);
@@ -134,7 +134,7 @@ public:
     std::shared_ptr<Expression> getLhs() { return lhs; }
     void setLhs(std::shared_ptr<Expression> lhs) { this->lhs = lhs; }
     operators getOp() { return op; }
-    double eval(std::map<std::string, int> &params) override;
+    double eval(std::map<std::string, double> &params) override;
     std::shared_ptr<Expression> diff(std::string &s) override;
     std::string toString() override;
     friend std::shared_ptr<Expression> optimize(std::shared_ptr<Expression> expr);
