@@ -76,7 +76,7 @@ std::pair<std::shared_ptr<Expression>, Token*> parseExpression(Token* token, int
                     case OP: {
                         oper op = token->value == "+" ? plus_op : token->value == "-" ? minus_op : token->value == "*" ? mul_op : token->value == "/" ? div_op : exp_op;
                         operators q = operators(op);
-                        if (q.rank < rank) {
+                        if (q.rank <= rank) {
                             return {tmp, token};
                         }
                         auto var = parseExpression(token->next.get(), q.rank, false);

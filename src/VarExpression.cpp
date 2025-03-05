@@ -10,7 +10,7 @@ std::shared_ptr<Expression> VarExpression::diff(std::string &s) {
 }
 
 double VarExpression::eval(std::map<std::string, double> &map) {
-    return map[value];
+    return map[value]; 
 }
 
 std::string VarExpression::toString() {

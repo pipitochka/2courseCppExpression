@@ -34,6 +34,7 @@ int main() {
     TestInput("2 * ln(x) + 3", "((2.000000 * ln(x)) + 3.000000)");
     TestInput("2 * (ln(x)) + 3 * sin(cos(x + y))", "((2.000000 * ln(x)) + (3.000000 * sin(cos((x + y)))))");
     TestInput("x ^ ln(y) + exp(z) ^ (cos(t) + sin(m))", "((x ^ ln(y)) + (exp(z) ^ (cos(t) + sin(m))))");
-    TestInput("a * b / c", "(a * (b / c))");
+    TestInput("a / b * c", "((a / b) * c)");
+    TestInput("a * b / c", "((a * b) / c)");
 }
 
