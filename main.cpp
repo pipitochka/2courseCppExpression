@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
             env.insert(std::pair<std::string, double>(key, value_key));
         }
         auto token = tokenize(value);
-        auto expr = parseExpression(token.get());
+        auto expr = parseExpression<double>(token.get());
         std::cout << expr->eval(env) << std::endl;
     }
 
@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
             throw InvalidSyntaxException();
         }
         auto token = tokenize(value);
-        auto expr = parseExpression(token.get());
+        auto expr = parseExpression<double>(token.get());
         std::cout << optimize(expr->diff(param))->toString() << std::endl;
     }
 }
