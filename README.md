@@ -22,49 +22,25 @@ $ make
 В CMakeList
 ```cmake
 include_directories(inc)
-
-file(GLOB EXPRESSION_SOURCES
-        src/BinaryExpression.cpp
-        src/ConstantExpression.cpp
-        src/MonoExpression.cpp
-        src/VarExpression.cpp
-        src/Optimization.cpp
-)
-
-add_library(EXPRESSION ${EXPRESSION_SOURCES})
-target_link_libraries(YOUR_TARGET PRIVATE EXPRESSION)
 ```
+
 
 Для подключения парсера из строчки в Expression (вместе с Expression)
 ```cpp
 #include "inc/Parser.h"
+#include "inc/Expression.h"
 ```
 В CMakeList
 ```cmake
 include_directories(inc)
 
-file(GLOB EXPRESSION_SOURCES
-        src/BinaryExpression.cpp
-        src/ConstantExpression.cpp
-        src/MonoExpression.cpp
-        src/VarExpression.cpp
-        src/Optimization.cpp
-)
-
 file(GLOB TOKEN_SOURCES
         src/Token.cpp
 )
 
-file(GLOB PARSER_SOURCES
-        src/Parser.cpp
-)
-
-add_library(EXPRESSION ${EXPRESSION_SOURCES})
 add_library(TOKEN ${TOKEN_SOURCES})
-add_library(PARSER ${PARSER_SOURCES})
 
-target_link_libraries(PARSER PRIVATE TOKEN EXPRESSION)
-target_link_libraries(YOUR_TARGET PRIVATE EXPRESSION TOKEN PARSER)
+target_link_libraries(YOUR_TARGET PRIVATE TOKEN)
 
 
 ```
@@ -73,12 +49,12 @@ target_link_libraries(YOUR_TARGET PRIVATE EXPRESSION TOKEN PARSER)
 
 Создание выржаения
 ```cpp
-auto expr = std::make_shared<BinaryExpression>(
-    std::make_shared<MonoExpression>(
-        std::make_shared<VarExpression>("x"),
+auto expr = std::make_shared<BinaryExpression<double>>(
+    std::make_shared<MonoExpression<double>>(
+        std::make_shared<VarExpression<double>>("x"),
         sin_func
     ),
-    std::make_shared<ConstantExpression>(3),
+    std::make_shared<ConstantExpression<double>>(3),
     mul_op
 );
 ```
