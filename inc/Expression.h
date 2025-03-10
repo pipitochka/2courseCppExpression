@@ -50,7 +50,7 @@ template <typename T>
 class Expression {
 public:
     virtual std::shared_ptr<Expression> diff(std::string &s) = 0;
-    virtual T eval(std::map<std::string, double> &params) = 0;
+    virtual T eval(std::map<std::string, T> &params) = 0;
     virtual std::string toString() = 0;
 };
 
@@ -70,7 +70,7 @@ public:
     T getValue() {
         return value;
     }
-    T eval(std::map<std::string, double> &params) override;
+    T eval(std::map<std::string, T> &params) override;
     
     std::shared_ptr<Expression<T>> diff(std::string &s) override;
     
@@ -90,7 +90,7 @@ public:
     VarExpression(VarExpression&&) = default;
     VarExpression& operator=(VarExpression&&) = default;
 
-    T eval(std::map<std::string, double> &params) override;
+    T eval(std::map<std::string, T> &params) override;
     std::shared_ptr<Expression<T>> diff(std::string &s) override;
     std::string toString() override;
 };
@@ -112,7 +112,7 @@ public:
     MonoExpression(MonoExpression&&) = default;
     MonoExpression& operator=(MonoExpression&&) = default;
 
-    T eval(std::map<std::string, double> &params) override;
+    T eval(std::map<std::string, T> &params) override;
     std::shared_ptr<Expression<T>> diff(std::string &s) override;
     std::string toString() override;
     friend std::shared_ptr<Expression<T>> optimize(std::shared_ptr<Expression<T>> expr);
@@ -139,7 +139,7 @@ public:
     std::shared_ptr<Expression<T>> getLhs() { return lhs; }
     void setLhs(std::shared_ptr<Expression<T>> lhs) { this->lhs = lhs; }
     operators getOp() { return op; }
-    T eval(std::map<std::string, double> &params) override;
+    T eval(std::map<std::string, T> &params) override;
     std::shared_ptr<Expression<T>> diff(std::string &s) override;
     std::string toString() override;
     friend std::shared_ptr<Expression<T>> optimize(std::shared_ptr<Expression<T>> expr);
@@ -241,7 +241,7 @@ std::shared_ptr<Expression<T>> optimize(std::shared_ptr<Expression<T>> expr) {
 }
 
 template <typename T>
-T ConstantExpression<T>::eval(std::map<std::string, double> &params) {
+T ConstantExpression<T>::eval(std::map<std::string, T> &params) {
     return value;
 }
 
@@ -259,7 +259,7 @@ std::string ConstantExpression<T>::toString() {
 }
 
 template <typename T>
-T VarExpression<T>::eval(std::map<std::string, double> &params) {
+T VarExpression<T>::eval(std::map<std::string, T> &params) {
     return params[value]; 
 }
 
@@ -279,7 +279,7 @@ std::string VarExpression<T>::toString() {
 }
 
 template <typename T>
-T MonoExpression<T>::eval(std::map<std::string, double> &params)  {
+T MonoExpression<T>::eval(std::map<std::string, T> &params)  {
         switch (function) {
             case cos_func:
                 return std::cos(expr->eval(params));
@@ -348,7 +348,7 @@ std::string MonoExpression<T>::toString()  {
     }
 
 template <typename T>
-T BinaryExpression<T>::eval(std::map<std::string, double> &params)  {
+T BinaryExpression<T>::eval(std::map<std::string, T> &params)  {
         switch (op.value) {
             case plus_op:
                 if (lhs->eval(params) == T(0) && rhs->eval(params) == T(0)) {
