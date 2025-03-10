@@ -17,7 +17,7 @@ void TestEvalDouble(std::string input, double expected, std::map<std::string, do
     assert(qq == expected);
 }
 
-void TestEvalComplex(std::string input, std::complex<double> expected, std::map<std::string, double> params) {
+void TestEvalComplex(std::string input, std::complex<double> expected, std::map<std::string, std::complex<double>> params) {
     auto tmp = tokenize(input);
     auto result = parseExpression<std::complex<double>>(tmp.get());
     auto qq = result->eval(params);
